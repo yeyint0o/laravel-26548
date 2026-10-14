@@ -17,7 +17,7 @@
     </tr>
     @forelse ($books as $id => $book)
       <tr>
-        <td><a href="/books/{{ $id }}">{{ $book['title'] }}</a></td>
+        <td><a href="{{ route('books.show', $id) }}">{{ $book['title'] }}</a></td>
         <td>{{ $book['author'] }}</td>
         <td>
           @if ($book['price'] >= 1000)
@@ -34,6 +34,6 @@
     @endforelse
   </table>
 
-  <p><a href="/top">トップへ戻る</a></p>
+  <p><a href="{{ route('top') }}">トップへ戻る</a></p>
 </body>
 </html>
