@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
     public function index()
     {
-        $books = $this->books();
+        $books = Book::all();
 
         return view('books.index', [
             'title' => '本棚',
@@ -19,21 +20,8 @@ class BookController extends Controller
 
     public function show($id)
     {
-        $books = $this->books();
+        $book = Book::findOrFail($id);
 
-        if (! isset($books[$id])) {
-            abort(404);
-        }
-
-        return view('books.show', ['book' => $books[$id]]);
-    }
-
-    private function books()
-    {
-        return [
-            1 => ['title' => '吾輩は猫である', 'author' => '夏目漱石', 'price' => 660],
-            2 => ['title' => '走れメロス',     'author' => '太宰治',   'price' => 440],
-            3 => ['title' => '銀河鉄道の夜',   'author' => '宮沢賢治', 'price' => 1100],
-        ];
+        return view('books.show', ['book' => $book]);
     }
 }
